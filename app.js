@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     function createDiv(){
     const divContainer = document.querySelector('grid')
-    for(let i=0; i < 98; i++){
+    for(let i=0; i < 100; i++){
         const myDiv = document.createElement('div')
         grid.appendChild(myDiv)
     }
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 createDiv()
 
 const squares = document.querySelectorAll('.grid div')
-const scoreDisplay = document.querySelectorAll('span') // score will be displayed in the span container see index.html
+const scoreDisplay = document.querySelector('span') // score will be displayed in the span container see index.html
 const startBtn = document.querySelector('.start')
 
 const width = 10 // for pressing up or down in a 10x10 grid
@@ -62,7 +62,7 @@ function moveOutcomes(){
     currentSnake.unshift(currentSnake[0] + direction)
 
     // Snake eating apple
-    if(squares[currentSnake[0].classList.contains('apple')]){
+    if(squares[currentSnake[0]].classList.contains('apple')){
         squares[currentSnake[0]].classList.remove('apple')
         squares[tail].classList.add('snake')
         currentSnake.push(tail)
@@ -71,9 +71,9 @@ function moveOutcomes(){
         scoreDisplay.innerHTML = score
         clearInterval(interval)
         intervalTime = intervalTime * speed
-        interval = setInterval(moveOutcomes, intervalTime)
+        interval = setInterval(moveOutcomes,intervalTime)
     }
-    squares[currentSnake[0].classList.add('snake')]
+    squares[currentSnake[0]].classList.add('snake')
 }
 
 function randomApple(){
@@ -85,7 +85,7 @@ function randomApple(){
 
 // Functionality for pressing keys
 function control(e){
-    squares[currentIndex].classList.remove('snake') // remove the snakehead div when key is pressed
+    //squares[currentIndex].classList.remove('snake') // remove the snakehead div when key is pressed
     
     switch (e.key) {
         case "ArrowLeft":
@@ -97,11 +97,11 @@ function control(e){
             console.log('Right')
             break;
         case "ArrowUp":
-            direction = +width      // 10x10 grid
+            direction = -width      
             console.log('Up')
             break;
         case "ArrowDown":
-            direction = -width
+            direction = +width
             console.log('Down')
             break;
     }
